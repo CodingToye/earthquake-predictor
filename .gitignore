@@ -1,0 +1,34 @@
+# Node (client)
+client/node_modules/
+client/dist/
+client/.env
+client/.DS_Store
+
+# Python (server)
+server/__pycache__/
+server/.venv/
+server/env/
+server/venv/
+server/.env
+server/*.pyc
+server/*.pyo
+server/*.pyd
+
+# Data
+data/*.csv
+data/*.xlsx
+data/*.json
+data/raw/
+data/temp/
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
