@@ -1,12 +1,12 @@
+import Earthquakes from "@/components/Earthquakes";
 import "./App.css";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   return (
-    <>
-      <div className="bg-sky-500">
-        <h1>Earthquake Predictor 123</h1>
-      </div>
-    </>
+    <main className="m-auto p-4 grid grid-cols-1 gap-4">
+      <Earthquakes />
+    </main>
   );
 }
 

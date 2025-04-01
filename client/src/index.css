@@ -1,1 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "tailwindcss";
+
+@theme {
+  --color-neutral-100: rgb(26, 26, 22);
+  --color-neutral-200: rgb(31, 31, 31);
+  --color-green-100: rgb(186, 255, 102);
+  --color-blue-100: rgb(11, 110, 181);
+  --color-orange-100: rgb(250, 109, 34);
+  --color-orange-200: rgb(211, 92, 28);
+  --font-display: "Urbanist", "sans-serif";
+  --font-body: "Inter", "serif";
+  /* --material-icon: "tsunami"; */
+}
+
+body {
+  @apply bg-neutral-100;
+  @apply font-body;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-display;
+  text-align: left;
+}
+
+h1 {
+}
+h2 {
+  @apply text-green-100;
+}
+h3 {
+}
+
+.marker-pulse-wrapper {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.marker-small {
+  width: 12px;
+  height: 12px;
+}
+
+.marker-medium {
+  width: 18px;
+  height: 18px;
+}
+
+.marker-large {
+  width: 48px;
+  height: 48px;
+}
+
+.dot {
+  @apply bg-blue-100;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.marker-static {
+  width: 18px;
+  height: 18px;
+  > div {
+    @apply bg-orange-100/50;
+    @apply border-orange-200;
+    border-width: 1px;
+    border-style: solid;
+    display: none;
+  }
+  > .dot {
+    display: block;
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+  }
+  &:hover {
+    > div {
+      display: block;
+      opacity: 1;
+    }
+    > .dot {
+      @apply bg-orange-100;
+    }
+  }
+}
+
+.pulse-ring {
+  @apply bg-blue-100;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite ease-out;
+}
+
+.pulse-ring.secondary {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  z-index: -1;
+}
+
+.marker-large > .pulse-ring {
+  width: 48px;
+  height: 48px;
+}
+
+.marker-large > .pulse-ring.secondary {
+  width: 72px;
+  height: 72px;
+}
+
+.marker-medium > .pulse-ring {
+  width: 36px;
+  height: 36px;
+}
+
+.marker-medium > .pulse-ring.secondary {
+  width: 48px;
+  height: 48px;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+}
+
+.leaflet-popup-content .custom-popup {
+  @apply text-white bg-neutral-800 p-2 rounded-lg shadow-md;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-tip {
+  background: #1f2937 !important; /* same as bg-neutral-800 */
+}
+
+.debug {
+  outline: 1px dashed white;
+  color: inherit;
+}
