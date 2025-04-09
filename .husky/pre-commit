@@ -1,0 +1,11 @@
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Allowed prefixes
+if ! echo "$branch" | grep -E -q '^(main|develop|feat|bug|ui|test|refactor|chore)/.+$'; then
+  echo "❌ Invalid branch name: '$branch'"
+  echo "💡 Use a prefix like: feat/, bug/, ui/, test/, refactor/, or chore/"
+  echo "   e.g., feat/add-zoom-control or bug/fix-slider-bug"
+  exit 1
+fi
+
+echo "✅ Branch name OK: $branch"
