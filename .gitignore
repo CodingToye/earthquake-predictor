@@ -32,3 +32,6 @@ data/temp/
 
 # PyCharm
 .idea/
+
+# Environment
+.env
