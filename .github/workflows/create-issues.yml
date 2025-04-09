@@ -1,4 +1,4 @@
-name: Create Issues from File
+name: Create Multiple Issues from File
 
 on:
   workflow_dispatch:
@@ -7,13 +7,10 @@ jobs:
   create_issues:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Create Issues
         uses: peter-evans/create-issue-from-file@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
-          title: "Import enhancement issues"
-          content-filepath: .github/issues.yml
-          labels: auto
+          issues-file: .github/issues.yml
