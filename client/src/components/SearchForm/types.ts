@@ -1,6 +1,6 @@
 // components/SearchForm/types
 
-export type SearchFormType = {
+export type SearchFormProps = {
   error: string | null;
   searchByLocation: (query: string) => Promise<void>;
 };

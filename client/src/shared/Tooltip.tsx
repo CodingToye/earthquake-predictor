@@ -1,11 +1,6 @@
-import {ReactNode} from "react";
+// shared/Tooltip.tsx
 
-type TooltipProps = {
-  children: ReactNode;
-  text?: string;
-  position?: "top" | "bottom" | "left" | "right";
-};
-
+import {TooltipProps} from "./types";
 export default function Tooltip({
   children,
   text,

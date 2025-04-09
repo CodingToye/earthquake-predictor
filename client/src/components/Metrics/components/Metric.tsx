@@ -1,7 +1,10 @@
+// components/Metrics/components/Metric.tsx
+
 import Icon from "@mui/material/Icon";
 
 import Tooltip from "@/shared/Tooltip";
-import {MetricProps} from "./types";
+
+import {BaseMetricProps} from "./types";
 
 export default function Metric({
   label,
@@ -15,20 +18,24 @@ export default function Metric({
   iconName,
   barClass,
   tooltip,
-}: MetricProps) {
+}: BaseMetricProps) {
   const valueToShow =
     showPredicted && predictedValue !== undefined ? predictedValue : realValue;
 
   return (
-    <div className="text-white flex flex-col items-center gap-1 border p-4 cursor-pointer">
-      <Icon className={iconClass}>{iconName}</Icon>
+    <div className="text-white flex flex-col items-center gap-1  p-4 cursor-pointer">
       <span className="group">
         <Tooltip text={tooltip}>
-          <span className="text-white/60 uppercase text-xs">{label}</span>
+          <span className="text-white/60 uppercase text-xs flex gap-1 items-center">
+            <Icon className={iconClass} sx={{fontSize: 16}}>
+              {iconName}
+            </Icon>{" "}
+            {label}
+          </span>
         </Tooltip>
       </span>
       {!barClass ? (
-        <span className="text-3xl">
+        <span className="text-1xl">
           {format
             ? format(valueToShow as string | number)
             : typeof valueToShow === "number" && fixedPoint !== undefined
@@ -37,7 +44,7 @@ export default function Metric({
           {valueSuffix && <small className="text-xs">{valueSuffix}</small>}
         </span>
       ) : (
-        <span className={`block w-18 h-1 grow rounded ${barClass}`}></span>
+        <span className={`block w-full h-1 grow rounded ${barClass}`}></span>
       )}
     </div>
   );

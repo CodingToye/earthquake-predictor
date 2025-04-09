@@ -1,4 +1,7 @@
+// hooks/useMetricConfigs.ts
+
 import {useMemo} from "react";
+
 import {EarthquakeData} from "./types";
 import {MetricConfig, StaticMetricConfig} from "./types";
 
@@ -33,7 +36,7 @@ export function useMetricConfigs(latest: EarthquakeData | null) {
       {
         label: "Tsu",
         key: "tsunami",
-        iconClass: "text-blue-300",
+        iconClass: "text-blue-100",
         iconName: "tsunami",
         format: (val) => (val === 1 || val === "1" ? "Yes" : "No"),
         tooltip: "Tsunami potential (Yes/No)",

@@ -1,6 +1,7 @@
 // hooks/useEarthquakeData.ts
 
-import {useEffect, useState, useRef, useCallback} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+
 import {EarthquakeData, PredictedMetricProps} from "./types";
 
 export function useEarthquakeData() {

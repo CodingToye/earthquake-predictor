@@ -1,6 +1,6 @@
 // components/Metrics/components/types.ts
 
-export type MetricProps = {
+export type BaseMetricProps = {
   label: string;
   realValue?: number | string;
   predictedValue?: number | string;

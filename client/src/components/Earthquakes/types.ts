@@ -1,0 +1,1 @@
+// components/Earthquakes/types.ts

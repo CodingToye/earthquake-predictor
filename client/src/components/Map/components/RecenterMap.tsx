@@ -1,7 +1,10 @@
+// components/Map/components/RecenterMap.tsx
+
 import {useEffect} from "react";
 import {useMap} from "react-leaflet";
-import {MapViewProps} from "@/types/common";
-export default function RecenterMap({latitude, longitude}: MapViewProps) {
+
+import {MapProps} from "../types";
+export default function RecenterMap({latitude, longitude}: MapProps) {
   const map = useMap();
 
   useEffect(() => {

@@ -1,11 +1,13 @@
-import {ToggleSwitchType} from "./types";
+// shared/ToggleSwitch.tsx
+
+import {ToggleSwitchProps} from "./types";
 
 export default function ToggleSwitch({
   labelLeft = "Off",
   labelRight = "On",
   checked,
   onChange,
-}: ToggleSwitchType) {
+}: ToggleSwitchProps) {
   return (
     <div className="flex items-center gap-2 mb-2">
       <span className="text-white/50 text-sm">{labelLeft}</span>
