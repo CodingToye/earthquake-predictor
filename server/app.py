@@ -68,7 +68,7 @@ async def predict(features: EarthquakeFeatures):
         "predicted_depth": round(float(dep[0][0]), 1),
     }
 
-df = pd.read_csv("../data/earthquake_1995-2023.csv")
+df = pd.read_csv("earthquake_1995-2023.csv")
 df["date_time"] = pd.to_datetime(df['date_time'])
 
 @app.get("/latest")
