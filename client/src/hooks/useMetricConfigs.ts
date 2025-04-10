@@ -3,7 +3,7 @@
 import {useMemo} from "react";
 
 import {EarthquakeData} from "./types";
-import {MetricConfig, StaticMetricConfig} from "./types";
+import {StaticMetricConfig} from "./types";
 
 const alertColorMap = {
   red: "text-red-500",
