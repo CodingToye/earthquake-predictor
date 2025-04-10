@@ -1,9 +1,6 @@
 // components/Metrics/Metrics.tsx
 
-import {useState} from "react";
-
 import {useMetricConfigs} from "@/hooks/useMetricConfigs";
-import ToggleSwitch from "@/shared/ToggleSwitch";
 
 import Metric from "./components/Metric";
 import {MetricsProps} from "./types";
