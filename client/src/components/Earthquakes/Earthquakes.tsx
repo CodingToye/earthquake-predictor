@@ -1,6 +1,6 @@
 // client/src/components/Earthquakes/Earthquakes.tsx
 
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 import {useEarthquakeData} from "@/hooks/useEarthquakeData";
 import {useFilters} from "@/hooks/useFilters";
@@ -15,6 +15,7 @@ import Map from "../Map";
 import Toolbar from "../Toolbar";
 
 export default function Earthquakes() {
+  const [showImperial, setShowImperial] = useState(false);
   const {
     filters,
     setFilterActive,
@@ -99,6 +100,8 @@ export default function Earthquakes() {
           latest={latest}
           predictedMetrics={predictedMetrics}
           onSearch={handleSearch}
+          showImperial={showImperial}
+          setShowImperial={setShowImperial}
         />
 
         <div className="absolute top-48 left-8 z-99 flex gap-4">
@@ -108,6 +111,7 @@ export default function Earthquakes() {
               setFilterValue={setFilterValue}
               setFilterActive={setFilterActive}
               nearbyCount={nearbyEarthquakes?.length}
+              showImperial={showImperial}
             />
           </Panel>
         </div>

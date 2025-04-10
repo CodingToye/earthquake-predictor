@@ -11,12 +11,16 @@ import SearchForm from "../SearchForm";
 type ToolbarProps = {
   latest: EarthquakeData | null;
   predictedMetrics: EarthquakeMetricProps | null;
+  showImperial: boolean;
+  setShowImperial: (value: boolean) => void;
   onSearch: (query: string) => Promise<void>;
 };
 
 export default function Toolbar({
   latest,
   predictedMetrics,
+  showImperial,
+  setShowImperial,
   onSearch,
 }: ToolbarProps) {
   const {error} = useEarthquakeData();
@@ -35,12 +39,12 @@ export default function Toolbar({
         <ToggleSwitch
           labelLeft="km"
           labelRight="mi"
-          checked={showPredicted}
-          onChange={() => setShowPredicted(!showPredicted)}
+          checked={showImperial}
+          onChange={() => setShowImperial(!showImperial)}
         />
       </div>
       <div className="grid auto-cols-auto grid-flow-col gap-4">
-        <GeoMetrics latest={latest} />
+        <GeoMetrics latest={latest} showImperial={showImperial} />
         <EffectMetrics
           latest={latest}
           predictedMetrics={predictedMetrics}

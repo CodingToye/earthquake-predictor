@@ -3,6 +3,7 @@
 import {useState} from "react";
 import Icon from "@mui/material/Icon";
 
+import {useDistanceUnit} from "@/hooks/useDistanceUnit";
 import Drawer from "@/shared/Drawer";
 
 import Filter from "./components/Filter";
@@ -12,9 +13,12 @@ export default function Filters({
   filters,
   setFilterActive,
   setFilterValue,
+  showImperial,
   nearbyCount,
 }: FiltersProps) {
   const [toggleFilters, setToggleFilters] = useState(false);
+  const {convertDistance, suffix} = useDistanceUnit(showImperial);
+  const toKm = (mi: number): number => mi / 0.621371;
 
   function handleToggleFilters() {
     setToggleFilters(!toggleFilters);
@@ -35,14 +39,22 @@ export default function Filters({
         <div className="w-full px-2 pb-4 grid grid-cols-2 items-start gap-0 debug">
           <Filter
             label="Radius"
-            unit="km"
-            min={10}
-            max={4000}
-            step={10}
-            values={[filters.radius.value]}
+            unit={suffix}
+            min={convertDistance(10, 0)}
+            max={convertDistance(4000, 0)}
+            step={convertDistance(10, 0)}
+            values={[
+              showImperial
+                ? convertDistance(filters.radius.value, 0)
+                : Math.round(filters.radius.value),
+            ]}
             isActive={filters.radius.active}
             onToggle={() => setFilterActive("radius", !filters.radius.active)}
-            onChange={([value]) => setFilterValue("radius", {value})}
+            onChange={([val]) =>
+              setFilterValue("radius", {
+                value: showImperial ? toKm(val) : val,
+              })
+            }
             extraClass="col-span-2"
           />
 
