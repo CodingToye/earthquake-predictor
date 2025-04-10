@@ -1,5 +1,6 @@
 // components/Metrics/Metrics.tsx
 
+import {useDistanceUnit} from "@/hooks/useDistanceUnit";
 import {useMetricConfigs} from "@/hooks/useMetricConfigs";
 
 import Metric from "./components/Metric";
@@ -10,7 +11,6 @@ export function EffectMetrics({
   predictedMetrics,
   showPredicted,
 }: MetricsProps) {
-  // const [showPredicted, setShowPredicted] = useState(false);
   const {effectMetrics} = useMetricConfigs(latest);
 
   return (
@@ -36,23 +36,30 @@ export function EffectMetrics({
   );
 }
 
-export function GeoMetrics({latest}: MetricsProps) {
+export function GeoMetrics({latest, showImperial}: MetricsProps) {
   const {geoMetrics} = useMetricConfigs(latest);
+  const {convertDistance, suffix} = useDistanceUnit(showImperial);
 
   return (
     <>
       {geoMetrics.map((card, i) => {
+        const rawValue = latest?.[card.key];
         return (
           <Metric
             key={i}
             label={card.label}
-            realValue={latest?.[card.key]}
+            realValue={
+              card.valueSuffix === "km"
+                ? convertDistance(rawValue as number)
+                : rawValue
+            }
             fixedPoint={card.fixedPoint}
             barClass={card.barClass}
             iconClass={card.iconClass}
             iconName={card.iconName}
             format={card.format}
             tooltip={card.tooltip}
+            valueSuffix={card.valueSuffix === "km" ? suffix : card.valueSuffix}
           />
         );
       })}

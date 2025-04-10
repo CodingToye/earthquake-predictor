@@ -25,4 +25,5 @@ export type FiltersProps = {
     value: Partial<FiltersProps["filters"][K]>
   ) => void;
   nearbyCount?: number;
+  showImperial: boolean;
 };
