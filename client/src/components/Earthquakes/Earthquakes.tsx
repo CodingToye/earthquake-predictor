@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from "react";
 
+import {useDistanceUnit} from "@/hooks/useDistanceUnit";
 import {useEarthquakeData} from "@/hooks/useEarthquakeData";
 import {useFilters} from "@/hooks/useFilters";
 import Panel from "@/shared/Panel";
@@ -16,6 +17,7 @@ import Toolbar from "../Toolbar";
 
 export default function Earthquakes() {
   const [showImperial, setShowImperial] = useState(false);
+  const {convertDistance, suffix} = useDistanceUnit(showImperial);
   const {
     filters,
     setFilterActive,
@@ -89,8 +91,11 @@ export default function Earthquakes() {
           </small>
           {notice && (
             <p className="text-xs text-yellow-400 italic">
-              Nearest match result to {searchedLocation}, {latest.distance_km}
-              km away
+              Nearest match result to {searchedLocation},{" "}
+              {showImperial
+                ? convertDistance(latest.distance_km, 0)
+                : latest.distance_km}{" "}
+              {suffix} away
             </p>
           )}
         </header>

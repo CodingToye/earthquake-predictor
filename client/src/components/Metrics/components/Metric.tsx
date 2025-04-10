@@ -41,7 +41,7 @@ export default function Metric({
             : typeof valueToShow === "number" && fixedPoint !== undefined
             ? valueToShow.toFixed(fixedPoint)
             : valueToShow ?? "-"}
-          {valueSuffix && <small className="text-xs">{valueSuffix}</small>}
+          {valueSuffix && <small className="text-xs"> {valueSuffix}</small>}
         </span>
       ) : (
         <span className={`block w-full h-1 grow rounded ${barClass}`}></span>
