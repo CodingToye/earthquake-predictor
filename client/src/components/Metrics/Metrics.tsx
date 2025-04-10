@@ -1,68 +1,85 @@
 // components/Metrics/Metrics.tsx
 
-import {useDistanceUnit} from "@/hooks/useDistanceUnit";
+import {AllMetricConfig} from "@/hooks/types";
 import {useMetricConfigs} from "@/hooks/useMetricConfigs";
 
-import Metric from "./components/Metric";
+import MetricWrapper from "./MetricWrapper";
 import {MetricsProps} from "./types";
 
-export function EffectMetrics({
+export function GeoMetrics({
   latest,
-  predictedMetrics,
+  showImperial,
   showPredicted,
-}: MetricsProps) {
-  const {effectMetrics} = useMetricConfigs(latest);
-
+  onMetricClick,
+}: MetricsProps & {onMetricClick: (metric: AllMetricConfig) => void}) {
+  const {geoMetrics} = useMetricConfigs(latest);
   return (
-    <>
-      {effectMetrics.map((card, i) => {
-        return (
-          <Metric
-            key={i}
-            label={card.label}
-            realValue={latest?.[card.key]}
-            fixedPoint={card.fixedPoint}
-            predictedValue={predictedMetrics?.[card.key]}
-            showPredicted={showPredicted && predictedMetrics !== null}
-            barClass={card.barClass}
-            iconClass={card.iconClass}
-            iconName={card.iconName}
-            format={card.format}
-            tooltip={card.tooltip}
-          />
-        );
-      })}
-    </>
+    <MetricWrapper
+      title="Geographic"
+      metrics={geoMetrics}
+      latest={latest}
+      showImperial={showImperial}
+      showPredicted={showPredicted}
+      onMetricClick={onMetricClick}
+    />
   );
 }
 
-export function GeoMetrics({latest, showImperial}: MetricsProps) {
-  const {geoMetrics} = useMetricConfigs(latest);
-  const {convertDistance, suffix} = useDistanceUnit(showImperial);
-
+export function EffectMetrics({
+  latest,
+  showImperial,
+  showPredicted,
+  onMetricClick,
+  predictedMetrics,
+}: MetricsProps & {onMetricClick: (metric: AllMetricConfig) => void}) {
+  const {effectMetrics} = useMetricConfigs(latest);
   return (
-    <>
-      {geoMetrics.map((card, i) => {
-        const rawValue = latest?.[card.key];
-        return (
-          <Metric
-            key={i}
-            label={card.label}
-            realValue={
-              card.valueSuffix === "km"
-                ? convertDistance(rawValue as number)
-                : rawValue
-            }
-            fixedPoint={card.fixedPoint}
-            barClass={card.barClass}
-            iconClass={card.iconClass}
-            iconName={card.iconName}
-            format={card.format}
-            tooltip={card.tooltip}
-            valueSuffix={card.valueSuffix === "km" ? suffix : card.valueSuffix}
-          />
-        );
-      })}
-    </>
+    <MetricWrapper
+      title="Effects"
+      metrics={effectMetrics}
+      latest={latest}
+      predictedMetrics={predictedMetrics}
+      showImperial={showImperial}
+      showPredicted={showPredicted}
+      onMetricClick={onMetricClick}
+    />
+  );
+}
+
+export function DetectionMetrics({
+  latest,
+  showImperial,
+  showPredicted,
+  onMetricClick,
+}: MetricsProps & {onMetricClick: (metric: AllMetricConfig) => void}) {
+  const {detectionMetrics} = useMetricConfigs(latest);
+  return (
+    <MetricWrapper
+      title="Detection"
+      metrics={detectionMetrics}
+      latest={latest}
+      showImperial={showImperial}
+      showPredicted={showPredicted}
+      onMetricClick={onMetricClick}
+    />
+  );
+}
+
+export function SignificanceMetrics({
+  latest,
+  showImperial,
+  showPredicted,
+  onMetricClick,
+}: MetricsProps & {onMetricClick: (metric: AllMetricConfig) => void}) {
+  const {significanceMetrics} = useMetricConfigs(latest);
+  return (
+    <MetricWrapper
+      title="Significance"
+      metrics={significanceMetrics}
+      latest={latest}
+      showImperial={showImperial}
+      showPredicted={showPredicted}
+      onMetricClick={onMetricClick}
+    />
   );
 }
