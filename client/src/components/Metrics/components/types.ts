@@ -12,4 +12,6 @@ export type BaseMetricProps = {
   iconName?: string;
   barClass?: string;
   tooltip?: string;
+  onClick?: () => void;
+  predictionAvailable?: boolean;
 };

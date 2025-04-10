@@ -9,12 +9,22 @@ export type MetricConfig = {
   iconName?: string;
   barClass?: string;
   tooltip?: string;
+  sig?: number;
+  net?: string;
+  nst?: number;
+  dmin?: number;
+  gap?: number;
+  mag_type?: string;
+  valueSuffix?: string;
+  alert?: string;
 };
 
 export type StaticMetricConfig = Omit<MetricConfig, "key"> & {
   key: keyof EarthquakeData;
   valueSuffix?: string;
 };
+
+export type AllMetricConfig = MetricConfig | StaticMetricConfig;
 
 export type EarthquakeMetricProps = {
   magnitude: number;
@@ -23,6 +33,12 @@ export type EarthquakeMetricProps = {
   cdi: number;
   depth: number;
   alert?: string;
+  sig?: number;
+  net?: string;
+  nst?: number;
+  dmin?: number;
+  gap?: number;
+  mag_type?: string;
 };
 
 export type EarthquakeData = EarthquakeMetricProps & {
@@ -35,4 +51,10 @@ export type EarthquakeData = EarthquakeMetricProps & {
   distance_km: number;
 };
 
-export type PredictedMetricProps = EarthquakeMetricProps;
+export type PredictedMetricProps = {
+  magnitude: number;
+  tsunami: number;
+  mmi: number;
+  cdi: number;
+  depth: number;
+};

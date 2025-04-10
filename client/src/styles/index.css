@@ -182,3 +182,8 @@ h3 {
   pointer-events: none;
   mix-blend-mode: screen;
 }
+
+.divider {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 1px;
+}
