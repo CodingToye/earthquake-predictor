@@ -18,7 +18,7 @@ export default function Map({
   const position: LatLngExpression = [latitude, longitude];
 
   return (
-    <div className="h-screen  relative z-40">
+    <div className="h-screen  pt-16 relative z-40">
       <MapContainer
         center={position}
         zoom={8}

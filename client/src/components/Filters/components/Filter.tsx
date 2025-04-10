@@ -21,7 +21,7 @@ export default function Filter({
     <div
       className={`${extraClass} flex items-center gap-4 transition-opacity relative ${
         isActive ? "opacity-75" : "opacity-25"
-      } px-2 py-2 `}
+      }  `}
     >
       <div
         className="flex flex-col items-start gap-4 p-4 text-white/60 text-sm w-full rounded hover:bg-white/10 border-1 border-transparent hover:border-black/80 inset-shadow-sm hover:inset-shadow-black/30 transition cursor-pointer"
@@ -53,15 +53,19 @@ export default function Filter({
           renderTrack={({props, children}) => (
             <div
               {...props}
-              className="w-full h-2 rounded"
+              className="w-full h-2 rounded inset-shadow-sm inset-shadow-black/30"
               style={{
                 ...props.style,
                 background: getTrackBackground({
                   values,
                   colors:
                     values.length === 2
-                      ? ["#d1d5db", "rgb(186, 255, 102)", "#d1d5db"]
-                      : ["rgb(186, 255, 102)", "#d1d5db"],
+                      ? [
+                          "rgb(6, 13, 23)",
+                          "rgb(11, 110, 181)",
+                          "rgb(6, 13, 23)",
+                        ]
+                      : ["rgb(11, 110, 181)", "rgb(6, 13, 23)"],
                   min,
                   max,
                 }),
@@ -74,7 +78,7 @@ export default function Filter({
             <div
               {...props}
               key={props.key}
-              className="w-4 h-4 rounded-full bg-white border-2 border-green-100 shadow"
+              className="w-4 h-4 rounded-full bg-blue-400 border-1 border-black/70 shadow"
             />
           )}
         />

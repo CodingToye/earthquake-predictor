@@ -8,19 +8,16 @@ import ToggleSwitch from "@/shared/ToggleSwitch";
 import Metric from "./components/Metric";
 import {MetricsProps} from "./types";
 
-export function EffectMetrics({latest, predictedMetrics}: MetricsProps) {
-  const [showPredicted, setShowPredicted] = useState(false);
+export function EffectMetrics({
+  latest,
+  predictedMetrics,
+  showPredicted,
+}: MetricsProps) {
+  // const [showPredicted, setShowPredicted] = useState(false);
   const {effectMetrics} = useMetricConfigs(latest);
 
   return (
     <>
-      <ToggleSwitch
-        labelLeft="Actual"
-        labelRight="AI"
-        checked={showPredicted}
-        onChange={() => setShowPredicted(!showPredicted)}
-      />
-
       {effectMetrics.map((card, i) => {
         return (
           <Metric

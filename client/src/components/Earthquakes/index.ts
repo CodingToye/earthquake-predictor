@@ -1,3 +1,3 @@
-// components/Earthquakrs/index.ts
+// components/Earthquakes/index.ts
 
 export {default} from "./Earthquakes";
