@@ -17,6 +17,7 @@ export type MetricConfig = {
   mag_type?: string;
   valueSuffix?: string;
   alert?: string;
+  onMetricClick?: () => void;
 };
 
 export type StaticMetricConfig = Omit<MetricConfig, "key"> & {

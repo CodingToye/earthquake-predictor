@@ -9,7 +9,7 @@ describe("SearchForm", () => {
     const mockSearch = jest.fn();
     setupSearchForm({searchFormPropsOverrides: {searchByLocation: mockSearch}});
 
-    const input = screen.getByPlaceholderText(/e.g. Tokyo/i);
+    const input = screen.getByPlaceholderText(/Tokyo.../i);
     fireEvent.change(input, {target: {value: "Berlin"}});
     fireEvent.keyDown(input, {key: "Enter", code: "Enter"});
 
@@ -22,7 +22,7 @@ describe("SearchForm", () => {
     const mockSearch = jest.fn();
     setupSearchForm({searchFormPropsOverrides: {searchByLocation: mockSearch}});
 
-    const input = screen.getByPlaceholderText(/e.g. Tokyo/i);
+    const input = screen.getByPlaceholderText(/Tokyo.../i);
     fireEvent.change(input, {target: {value: "Paris"}});
     fireEvent.keyDown(input, {key: "a", code: "KeyA"});
 
@@ -33,7 +33,7 @@ describe("SearchForm", () => {
     const mockSearch = jest.fn();
     setupSearchForm({searchFormPropsOverrides: {searchByLocation: mockSearch}});
 
-    const input = screen.getByPlaceholderText(/e.g. Tokyo/);
+    const input = screen.getByPlaceholderText(/Tokyo.../);
     fireEvent.keyDown(input, {key: "Enter", code: "Enter"});
 
     expect(mockSearch).not.toHaveBeenCalled();
