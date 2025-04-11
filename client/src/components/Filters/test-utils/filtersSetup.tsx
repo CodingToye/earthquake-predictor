@@ -1,7 +1,6 @@
 // components/Filters/test-utils/setup.tsx
 
 jest.mock("@/hooks/useFilters");
-jest.mock("@/hooks/useDistanceUnit");
 
 import {render} from "@testing-library/react";
 

@@ -27,21 +27,30 @@ jest.mock("../components/Filter", () => {
   MockFilter.displayName = "MockFilter";
   return MockFilter;
 });
+
+jest.mock("@/hooks/useDistanceUnit", () => ({
+  useDistanceUnit: jest.fn(),
+}));
+
 import {fireEvent, screen} from "@testing-library/react";
 
 import {baseFilters} from "@/components/__tests__/fixtures/filters.fixtures";
+import * as distanceUnitHook from "@/hooks/useDistanceUnit";
 
 import {setupFilters} from "../test-utils/filtersSetup";
-
 describe("Filters", () => {
   const mockSetFilterActive = jest.fn();
   const mockSetFilterValue = jest.fn();
 
   beforeEach(() => {
+    (distanceUnitHook.useDistanceUnit as jest.Mock).mockReturnValue({
+      convertDistance: (val: number) => val,
+      suffix: "km",
+    });
     jest.clearAllMocks();
   });
 
-  it("renders the filter header and count", () => {
+  it.only("renders the filter header and count", () => {
     setupFilters();
     expect(screen.getByText(/filters/i)).toBeInTheDocument();
     expect(

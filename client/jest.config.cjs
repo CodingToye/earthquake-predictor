@@ -14,8 +14,8 @@ module.exports = {
     "/__tests__/utils",
   ],
   testMatch: [
-    "**/__tests__/**/*.test.(ts|tsx|js)",
-    "**/?(*.)+(spec|test).(ts|tsx|js)",
+    "**/__tests__/**/*.test.{ts,tsx,js,jsx}",
+    "**/?(*.)+(spec|test).{ts,tsx,js,jsx}",
   ],
   transform: {
     "^.+\\.tsx?$": [

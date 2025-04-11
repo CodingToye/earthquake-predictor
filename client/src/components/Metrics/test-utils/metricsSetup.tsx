@@ -15,6 +15,8 @@ type SetupOptions = {
   useNullLatest?: boolean;
 };
 
+const handleMetricClick = () => {};
+
 export const setupEffectMetrics = ({
   latestOverrides = {},
   predictedOverrides = {},
@@ -26,11 +28,19 @@ export const setupEffectMetrics = ({
     ...predictedOverrides,
   };
 
-  return render(<EffectMetrics latest={latest} predictedMetrics={predicted} />);
+  return render(
+    <EffectMetrics
+      latest={latest}
+      predictedMetrics={predicted}
+      onMetricClick={handleMetricClick}
+    />
+  );
 };
 
 export const setupGeoMetrics = ({latestOverrides = {}}: SetupOptions = {}) => {
   const latest = createMockEarthquake(latestOverrides);
 
-  return render(<GeoMetrics latest={latest} />);
+  return render(
+    <GeoMetrics latest={latest} onMetricClick={handleMetricClick} />
+  );
 };
