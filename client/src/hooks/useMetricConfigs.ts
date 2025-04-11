@@ -159,7 +159,7 @@ export function useMetricConfigs(latest: EarthquakeData | null) {
         barClass:
           alertBgMap[latest?.alert as keyof typeof alertBgMap] ??
           alertBgMap.default,
-        tooltip: "USGS alert level (green/yellow/orange/red)",
+        tooltip: "USGS alert level",
         predictionAvailable: false,
       },
     ];

@@ -68,7 +68,7 @@ async def predict(features: EarthquakeFeatures):
         "predicted_depth": round(float(dep[0][0]), 1),
     }
 
-df = pd.read_csv("earthquake_1995-2023.csv")
+df = pd.read_csv("earthquake_1995-2023.csv", encoding="latin1")
 df["date_time"] = pd.to_datetime(df['date_time'])
 
 @app.get("/latest")
@@ -87,7 +87,13 @@ def get_latest_earthquake():
         "tsunami": int(latest["tsunami"]) if not pd.isna(latest["tsunami"]) else 0,
         "cdi": float(latest["cdi"]) if not pd.isna(latest["cdi"]) else None,
         "mmi": float(latest["mmi"]) if not pd.isna(latest["mmi"]) else None,
-        "alert": str(latest["alert"]) if not pd.isna(latest["alert"]) else None
+        "alert": str(latest["alert"]) if not pd.isna(latest["alert"]) else None,
+        "sig": int(round(latest["sig"])) if not pd.isna(latest["sig"]) else None,
+        "net": latest["net"],
+        "nst": int(round(latest["nst"])) if not pd.isna(latest["nst"]) else None,
+        "dmin": float(latest["dmin"]) if not pd.isna(latest["dmin"]) else None,
+        "gap": float(latest["gap"]) if not pd.isna(latest["gap"]) else None,
+        "mag_type": latest["mag_type"]
     }
 
     return JSONResponse(content=result)
@@ -116,7 +122,13 @@ def get_latest_earthquake_by_location(query: str = Query(...)):
         "tsunami": int(latest["tsunami"]) if not pd.isna(latest["tsunami"]) else 0,
         "cdi": float(latest["cdi"]) if not pd.isna(latest["cdi"]) else None,
         "mmi": float(latest["mmi"]) if not pd.isna(latest["mmi"]) else None,
-        "alert": str(latest["alert"]) if not pd.isna(latest["alert"]) else None
+        "alert": str(latest["alert"]) if not pd.isna(latest["alert"]) else None,
+        "sig": int(round(latest["sig"])) if not pd.isna(latest["sig"]) else None,
+        "net": latest["net"],
+        "nst": int(round(latest["nst"])) if not pd.isna(latest["nst"]) else None,
+        "dmin": float(latest["dmin"]) if not pd.isna(latest["dmin"]) else None,
+        "gap": float(latest["gap"]) if not pd.isna(latest["gap"]) else None,
+        "mag_type": latest["mag_type"]
     }
 
     return JSONResponse(content=result)
@@ -144,7 +156,13 @@ def get_nearest_earthquake(lat: float, lon: float):
         "cdi": float(closest["cdi"]) if not pd.isna(closest["cdi"]) else None,
         "mmi": float(closest["mmi"]) if not pd.isna(closest["mmi"]) else None,
         "distance_km": round(closest["distance_km"], 1),
-        "alert": str(closest["alert"]) if not pd.isna(closest["alert"]) else None
+        "alert": str(closest["alert"]) if not pd.isna(closest["alert"]) else None,
+        "sig": int(round(closest["sig"])) if not pd.isna(closest["sig"]) else None,
+        "net": closest["net"],
+        "nst": int(round(closest["nst"])) if not pd.isna(closest["nst"]) else None,
+        "dmin": float(closest["dmin"]) if not pd.isna(closest["dmin"]) else None,
+        "gap": float(closest["gap"]) if not pd.isna(closest["gap"]) else None,
+        "mag_type": closest["mag_type"]
     }
 
     return JSONResponse(content=result)
@@ -186,7 +204,13 @@ def get_earthquakes_nearby(lat: float, lon: float, radius_km: float = 50, mag_mi
             "cdi": float(row["cdi"]) if not pd.isna(row["cdi"]) else None,
             "mmi": float(row["mmi"]) if not pd.isna(row["mmi"]) else None,
             "distance_km": round(row.get("distance_km", 0), 1),
-            "alert": str(row["alert"]) if not pd.isna(row["alert"]) else None
+            "alert": str(row["alert"]) if not pd.isna(row["alert"]) else None,
+            "sig": int(round(row["sig"])) if not pd.isna(row["sig"]) else None,
+            "net": row["net"],
+            "nst": int(round(row["nst"])) if not pd.isna(row["nst"]) else None,
+            "dmin": float(row["dmin"]) if not pd.isna(row["dmin"]) else None,
+            "gap": float(row["gap"]) if not pd.isna(row["gap"]) else None,
+            "mag_type": row["mag_type"]
         })
 
     return JSONResponse(content=results)

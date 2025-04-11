@@ -1,6 +1,8 @@
 // client/src/components/Earthquakes/Earthquakes.tsx
 
 import {useEffect, useState} from "react";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
 
 import {useDistanceUnit} from "@/hooks/useDistanceUnit";
 import {useEarthquakeData} from "@/hooks/useEarthquakeData";
@@ -10,9 +12,6 @@ import {formatDateTime} from "@/utils/date";
 
 import Filters from "../Filters";
 import Map from "../Map";
-// import {EffectMetrics} from "../Metrics";
-// import {GeoMetrics} from "../Metrics";
-// import SearchForm from "../SearchForm";
 import Toolbar from "../Toolbar";
 
 export default function Earthquakes() {
@@ -36,6 +35,8 @@ export default function Earthquakes() {
     predictedMetrics,
     nearbyEarthquakes,
   } = useEarthquakeData();
+
+  countries.registerLocale(enLocale);
 
   useEffect(() => {
     if (!filters.radius.active && filters.magnitude.active) {
@@ -77,6 +78,8 @@ export default function Earthquakes() {
     );
   };
 
+  const countryCode = countries.getAlpha2Code(`${latest?.country}`, "en");
+
   if (!latest)
     return <p className="text-gray-500">Loading latest earthquake...</p>;
 
@@ -84,11 +87,15 @@ export default function Earthquakes() {
     <div className="py-4">
       <div className="flex gap-4 px-8 mb-2">
         <header className="flex flex-col text-left">
-          <h2 className="">{latest.location || latest.country}</h2>
+          <div className="flex flex-row gap-2">
+            <h2 className="">{latest.location || latest.country}</h2>
+            <span className={`fi fi-${countryCode?.toLowerCase()}`}></span>
+          </div>
           <small className="text-xs text-white/50">
             {formatDateTime(latest.date_time).date} at {""}
             {formatDateTime(latest.date_time).time}
           </small>
+
           {notice && (
             <p className="text-xs text-yellow-400 italic">
               Nearest match result to {searchedLocation},{" "}
