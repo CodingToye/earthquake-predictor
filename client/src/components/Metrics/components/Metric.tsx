@@ -20,6 +20,7 @@ export default function Metric({
   barClass,
   tooltip,
   onClick,
+  predictionAvailable,
 }: BaseMetricProps) {
   const valueToShow =
     showPredicted && predictedValue !== undefined ? predictedValue : realValue;

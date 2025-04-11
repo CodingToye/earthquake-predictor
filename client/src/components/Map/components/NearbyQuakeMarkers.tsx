@@ -2,6 +2,8 @@
 
 import {Marker, Popup} from "react-leaflet";
 import Icon from "@mui/material/Icon";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
 
 import {EarthquakeData} from "@/hooks/types";
 
@@ -14,6 +16,8 @@ export default function NearbyQuakeMarkers({
   earthquakes: EarthquakeData[];
   exclude: {latitude: number; longitude: number};
 }) {
+  countries.registerLocale(enLocale);
+
   return (
     <>
       {earthquakes
@@ -22,6 +26,7 @@ export default function NearbyQuakeMarkers({
             q.latitude !== exclude.latitude || q.longitude !== exclude.longitude
         )
         .map((q, i) => {
+          const countryCode = countries.getAlpha2Code(`${q?.country}`, "en");
           const date = new Date(q.date_time);
           return (
             <Marker
@@ -32,12 +37,17 @@ export default function NearbyQuakeMarkers({
               <Popup closeButton={false}>
                 <div className="custom-popup">
                   <h2 className="font-bold">
-                    {q.location},{" "}
+                    <div className="flex justify-between">
+                      {q.location},{" "}
+                      <span
+                        className={`fi fi-${countryCode?.toLowerCase()}`}
+                      ></span>
+                    </div>
                     <small>
                       {date.toDateString()} at {date.toLocaleDateString()}
                     </small>
                   </h2>
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 text-xs">
                     <div className="flex items-center gap-1">
                       <Icon>sensors</Icon>
                       {q.magnitude}

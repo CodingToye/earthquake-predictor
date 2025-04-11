@@ -28,14 +28,14 @@ export default function Map({
       >
         <TileLayer
           className="bluish-sat"
-          attribution="Tiles © Esri"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
         <RecenterMap latitude={latitude} longitude={longitude} />
         <Marker position={position} icon={getMarkerIcon(magnitude ?? 0)}>
           <Popup closeButton={false}>
             <div className="custom-popup">
-              <div className="flex gap-4">
+              <div className="flex gap-4 text-xs">
                 <div className="flex items-center gap-1">
                   <Icon>sensors</Icon>
                   {magnitude}
