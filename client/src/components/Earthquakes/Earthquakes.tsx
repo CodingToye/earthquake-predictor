@@ -114,6 +114,8 @@ export default function Earthquakes() {
           onSearch={handleSearch}
           showImperial={showImperial}
           setShowImperial={setShowImperial}
+          nearbyEarthquakes={nearbyEarthquakes}
+          filters={filters}
         />
 
         <div className="absolute top-48 left-8 z-99 flex gap-4">

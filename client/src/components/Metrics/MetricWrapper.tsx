@@ -1,7 +1,8 @@
 // components/Metrics/MetricWrapper.tsx
 
 import {EarthquakeData} from "@/hooks/types";
-import {AllMetricConfig, MetricConfig, StaticMetricConfig} from "@/hooks/types";
+import {MetricConfig, StaticMetricConfig} from "@/hooks/types";
+import {AllMetricConfig} from "@/hooks/types";
 import {useDistanceUnit} from "@/hooks/useDistanceUnit";
 
 import Metric from "./components/Metric";
@@ -14,7 +15,7 @@ interface MetricWrapperProps {
   predictedMetrics?: Record<string, number> | null;
   showPredicted?: boolean;
   className?: string;
-  onMetricClick: (metric: AllMetricConfig) => void;
+  onMetricClick: (metricKey: AllMetricConfig) => void;
 }
 
 export default function MetricWrapper({
@@ -38,7 +39,7 @@ export default function MetricWrapper({
       <div className={`flex flex-col pt-4 px-4 ${className}`}>
         <small className="uppercase text-xs mb-1 text-white/60">{title}</small>
         <div
-          className={`grid gap-x-2`}
+          className={`grid gap-x-1`}
           style={{
             gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))`,
           }}

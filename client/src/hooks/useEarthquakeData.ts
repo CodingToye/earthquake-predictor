@@ -17,10 +17,12 @@ export function useEarthquakeData() {
 
   const locationChangeCallback = useRef<((val: string) => void) | null>(null);
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
   const predictMetrics = async (lat: number, lon: number, dep: number) => {
     try {
       setPredictedMetrics(null);
-      const response = await fetch("http://localhost:8000/predict", {
+      const response = await fetch(`${API_BASE}/predict`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +49,7 @@ export function useEarthquakeData() {
 
   const fetchLatest = useCallback(async () => {
     try {
-      const res = await fetch("http://localhost:8000/latest");
+      const res = await fetch(`${API_BASE}/latest`);
       const data = await res.json();
       setLatest(data);
       predictMetrics(data.latitude, data.longitude, data.depth);
@@ -84,9 +86,7 @@ export function useEarthquakeData() {
         params.append("year_max", yearRange.max.toString());
       }
 
-      const url = `http://localhost:8000/nearby?${params.toString()}`;
-
-      const res = await fetch(url);
+      const res = await fetch(`${API_BASE}/nearby?${params.toString()}`);
       if (!res.ok) throw new Error("Failed to fetch nearby earthquakes");
       const data = await res.json();
       setNearbyEarthquakes(data);
@@ -105,7 +105,7 @@ export function useEarthquakeData() {
     ) => {
       try {
         const geoRes = await fetch(
-          `http://localhost:8000/geocode?query=${encodeURIComponent(query)}`
+          `${API_BASE}/geocode?query=${encodeURIComponent(query)}`
         );
         const geoData = await geoRes.json();
         if (!geoData.length) throw new Error("Location not found");
@@ -117,9 +117,7 @@ export function useEarthquakeData() {
         locationChangeCallback.current?.(query);
 
         const latestRes = await fetch(
-          `http://localhost:8000/latest-by-location?query=${encodeURIComponent(
-            query
-          )}`
+          `${API_BASE}/latest-by-location?query=${encodeURIComponent(query)}`
         );
 
         if (latestRes.status === 404) {
@@ -138,7 +136,7 @@ export function useEarthquakeData() {
         }
 
         const fallbackRes = await fetch(
-          `http://localhost:8000/nearest?lat=${lat}&lon=${lon}`
+          `${API_BASE}/nearest?lat=${lat}&lon=${lon}`
         );
         const fallbackData = await fallbackRes.json();
         setLatest(fallbackData);
