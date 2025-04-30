@@ -1,11 +1,12 @@
 // hooks/useFilters.ts
 
-import {useState, useMemo, useCallback} from "react";
+import {useCallback, useMemo, useState} from "react";
+
 import {useDebounce} from "./useDebounce";
 
 export function useFilters() {
   const [filters, setFilters] = useState({
-    radius: {active: true, value: 50},
+    radius: {active: true, value: 500},
     magnitude: {active: false, min: 4.0, max: 9.0},
     yearRange: {active: false, min: 1995, max: 2023},
   });

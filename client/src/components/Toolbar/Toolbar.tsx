@@ -4,9 +4,11 @@ import {EarthquakeData} from "@/hooks/types";
 import {EarthquakeMetricProps} from "@/hooks/types";
 import {AllMetricConfig} from "@/hooks/types";
 import {useEarthquakeData} from "@/hooks/useEarthquakeData";
+import {useFilters} from "@/hooks/useFilters";
 import MetricPanel from "@/shared/MetricPanel";
 import ToggleSwitch from "@/shared/ToggleSwitch";
 
+import LineChartByMetric from "../Graphs/LineChartByMetric";
 import {
   DetectionMetrics,
   EffectMetrics,
@@ -21,6 +23,8 @@ type ToolbarProps = {
   showImperial: boolean;
   setShowImperial: (value: boolean) => void;
   onSearch: (query: string) => Promise<void>;
+  nearbyEarthquakes: EarthquakeData[] | null;
+  filters: ReturnType<typeof useFilters>["filters"];
 };
 
 export default function Toolbar({
@@ -29,6 +33,8 @@ export default function Toolbar({
   showImperial,
   setShowImperial,
   onSearch,
+  nearbyEarthquakes,
+  filters,
 }: ToolbarProps) {
   const {error} = useEarthquakeData();
   const [showPredicted, setShowPredicted] = useState(false);
@@ -88,7 +94,19 @@ export default function Toolbar({
           isOpen={!!activeMetric}
           onClose={() => setActiveMetric(null)}
           activeMetric={activeMetric}
-        ></MetricPanel>
+        >
+          {filters.radius.active ? (
+            <LineChartByMetric
+              earthquakes={nearbyEarthquakes ?? []}
+              metricKey={activeMetric.key}
+              label={activeMetric.label}
+            />
+          ) : (
+            <p className="text-sm text-white/50">
+              No data available for this metric.
+            </p>
+          )}
+        </MetricPanel>
       )}{" "}
     </div>
   );

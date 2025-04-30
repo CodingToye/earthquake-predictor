@@ -16,7 +16,7 @@ export default function Filters({
   showImperial,
   nearbyCount,
 }: FiltersProps) {
-  const [toggleFilters, setToggleFilters] = useState(false);
+  const [toggleFilters, setToggleFilters] = useState(true);
   const {convertDistance, suffix} = useDistanceUnit(showImperial);
   const toKm = (mi: number): number => mi / 0.621371;
 
