@@ -18,13 +18,13 @@ export default function Map({
   const position: LatLngExpression = [latitude, longitude];
 
   return (
-    <div className="h-screen  pt-16 relative z-40">
+    <div className="md:h-screen pt-16 relative z-40">
       <MapContainer
         center={position}
         zoom={8}
         zoomControl={false}
         scrollWheelZoom={false}
-        className="h-full w-full"
+        className="h-128 md:h-full w-full"
       >
         <TileLayer
           className="bluish-sat"

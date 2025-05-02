@@ -12,7 +12,7 @@ export default function SearchForm({error, searchByLocation}: SearchFormProps) {
   };
 
   return (
-    <div className="w-full flex">
+    <div className="w-full flex flex-1">
       {error && <p className="text-red-600">{error}</p>}
       <Input inputType="text" placeholder="Tokyo..." onKeyDown={handleSearch} />
     </div>
