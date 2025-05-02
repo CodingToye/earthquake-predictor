@@ -39,7 +39,7 @@ export default function MetricWrapper({
       <div className={`flex flex-col pt-4 px-4 ${className}`}>
         <small className="uppercase text-xs mb-1 text-white/60">{title}</small>
         <div
-          className={`grid gap-x-1`}
+          className={`md:grid gap-x-1`}
           style={{
             gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))`,
           }}

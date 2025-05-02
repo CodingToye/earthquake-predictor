@@ -86,7 +86,7 @@ export default function Earthquakes() {
   return (
     <div className="py-4">
       <div className="flex gap-4 px-8 mb-2">
-        <header className="flex flex-col text-left">
+        <header className="flex flex-col text-left w-full">
           <div className="flex flex-row gap-2">
             <h2 className="">{latest.location || latest.country}</h2>
             <span className={`fi fi-${countryCode?.toLowerCase()}`}></span>
@@ -118,7 +118,7 @@ export default function Earthquakes() {
           filters={filters}
         />
 
-        <div className="absolute top-48 left-8 z-99 flex gap-4">
+        <div className="hidden md:flex absolute top-48 left-8 z-99 gap-4">
           <Panel>
             <Filters
               filters={filters}
