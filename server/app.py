@@ -13,6 +13,10 @@ from fastapi import HTTPException
 from tensorflow.keras.models import load_model
 from joblib import load
 from fastapi.middleware.cors import CORSMiddleware
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH = os.path.join(BASE_DIR, "earthquake_1995-2023.csv")
 
 # Load scaler
 scaler = load("scaler.pkl")
@@ -68,11 +72,21 @@ async def predict(features: EarthquakeFeatures):
         "predicted_depth": round(float(dep[0][0]), 1),
     }
 
-df = pd.read_csv("earthquake_1995-2023.csv", encoding="latin1")
-df["date_time"] = pd.to_datetime(df['date_time'])
+df = None
+
+try:
+    df = pd.read_csv(CSV_PATH, encoding="latin1")
+    df["date_time"] = pd.to_datetime(df['date_time'])
+except FileNotFoundError:
+    print(f"⚠️ CSV file not found at {CSV_PATH}")
+except Exception as e:
+    print(f"⚠️ Error loading CSV: {e}")
+
 
 @app.get("/latest")
 def get_latest_earthquake():
+    if df is None:
+        raise HTTPException(status_code=500, detail="Dataset is unavailable on the server.")
     latest = df.sort_values("date_time", ascending=False).iloc[0]
 
     result = {
