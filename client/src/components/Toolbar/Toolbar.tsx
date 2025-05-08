@@ -42,28 +42,39 @@ export default function Toolbar({
     null
   );
 
+  const [showMetrics, setShowMetrics] = useState<boolean>(false);
+
+  const toggleMetrics = () => {
+    setShowMetrics(!showMetrics);
+  };
+
   return (
     <div className="absolute top-0 left-0 z-99  w-full bg-linear-to-b from-black/30 to-black/40 text-white/80 border-b-1 border-black/60 shadow-md backdrop-blur-x">
-      <div className="md:hidden">
+      <div className="col-span-2 p-2 px-2 pr-4 flex flex-col md:flex-row gap-8 border-b-1 border-black/30 bg-black/20">
         <SearchForm error={error} searchByLocation={onSearch} />
+        <div className="flex flex-row gap-8">
+          <ToggleSwitch
+            labelLeft="Actual"
+            labelRight="Predicted"
+            checked={showPredicted}
+            onChange={() => setShowPredicted(!showPredicted)}
+          />
+          <ToggleSwitch
+            labelLeft="km"
+            labelRight="mi"
+            checked={showImperial}
+            onChange={() => setShowImperial(!showImperial)}
+          />
+        </div>
+        <button type="button" className="text-xs" onClick={toggleMetrics}>
+          Show Metrics
+        </button>
       </div>
-      <div className="hidden col-span-2 p-2 px-2 pr-4 md:flex flex-col md:flex-row gap-8 border-b-1 border-black/30 bg-black/20">
-        <SearchForm error={error} searchByLocation={onSearch} />
-
-        <ToggleSwitch
-          labelLeft="Actual"
-          labelRight="Predicted"
-          checked={showPredicted}
-          onChange={() => setShowPredicted(!showPredicted)}
-        />
-        <ToggleSwitch
-          labelLeft="km"
-          labelRight="mi"
-          checked={showImperial}
-          onChange={() => setShowImperial(!showImperial)}
-        />
-      </div>
-      <div className="hidden md:flex flex-row gap-0 w-full divide-x divide-black/60 overflow-auto">
+      <div
+        className={`${
+          showMetrics ? "flex" : "hidden"
+        } md:flex flex-row gap-0 w-full md:divide-x divide-black/60`}
+      >
         <GeoMetrics
           latest={latest}
           showImperial={showImperial}
